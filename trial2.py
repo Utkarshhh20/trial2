@@ -85,7 +85,7 @@ def volatility():
         lines = ('vixopen', 'vixhigh', 'vixlow', 'vixclose',)
 
         params = (
-            ('dtformat', '%Y-%m-%d'),#'dtformat', '%Y-%m-%d'),
+            ('dtformat', '%y-%m-%d'),#'dtformat', '%Y-%m-%d'),
             ('date', 0),
             ('spyopen', 1),
             ('spyhigh', 2),
@@ -101,7 +101,7 @@ def volatility():
 
     class VIXData(bt.feeds.GenericCSVData):
             params = (
-            ('dtformat', '%Y-%m-%d'),
+            ('dtformat', '%y-%m-%d'),
             ('date', 0),
             ('vixopen', 1),
             ('vixhigh', 2),
