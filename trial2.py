@@ -176,6 +176,7 @@ def volatility():
 
 def backtestgolden():
     global strategy
+    from goldencrossover import goldencrossover
     ticker=st.sidebar.text_input("Stock ticker", value="AAPL")
     start=st.sidebar.text_input("Start date", value="2018-01-31")
     end=st.sidebar.text_input("End date", value=today)
