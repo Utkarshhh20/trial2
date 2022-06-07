@@ -217,7 +217,6 @@ def backtestgolden():
     st.pyplot(figure)
     st.subheader(f"{ticker}'s total returns are {returns}% with a {annual_return}% APY")
     strategy=''
-
 def backtestbollinger():
     global strategy
     import numpy as np
