@@ -101,7 +101,7 @@ def volatility():
 
     class VIXData(bt.feeds.GenericCSVData):
             params = (
-            ('dtformat', '%Y-%m-%d %H:%M:%S'),
+            ('dtformat', '%Y-%m-%d'),
             ('date', 0),
             ('vixopen', 1),
             ('vixhigh', 2),
@@ -113,6 +113,7 @@ def volatility():
     df = yf.download(tickers=ticker, start=start, end=end, rounding= False)
     ticker=ticker
     df=df.reset_index() 
+    st.dataframe(df)
     df2 = yf.download(tickers='^VIX', start=start, end=end, rounding= False)
     df2.rename(columns = {'Open':'Vix Open', 'High':'Vix High', 'Low':'Vix Low', 'Close':'Vix Close'}, inplace = True)
     df2=df2.drop("Volume", axis=1)
