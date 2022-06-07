@@ -460,7 +460,7 @@ title_alignment2="""
     </body>
     """
 st.sidebar.markdown(title_alignment2, unsafe_allow_html=True)
-dashboard = st.sidebar.selectbox('', ('Home', 'Fundamental Analysis', 'Technical Indicators', 'Backtesting', 'Pattern Stocks'), 0)
+dashboard = st.sidebar.selectbox('', ('Home', 'Screener', 'Fundamental Analysis', 'Technical Indicators', 'Backtesting', 'Pattern Stocks'), 0)
 st.title(dashboard)
 st.write('___')
 if dashboard=='Home':
@@ -497,7 +497,9 @@ if dashboard=='Home':
 1. Fundamental Analysis\n
 2. Technical Analysis\n
 3. Backtesting''')
-if dashboard=='Fundamental Analysis':
+if dashboard=='Screener':
+    screener()
+elif dashboard=='Fundamental Analysis':
     s_fundament = st.sidebar.selectbox('What would you like to do?', ('Learn', 'Check fundamentals'), 0)
     if s_fundament=='Learn':
         st.subheader('What Is Fundamental Analysis?')
