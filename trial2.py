@@ -119,6 +119,114 @@ def volatility():
     df2=df2.drop("Adj Close", axis=1)
     df2=df2.reset_index()
     df3=df2
+    df3.to_csv(r'https://github.com/Utkarshhh20/trial/blob/main/trial.csv')
+    df2=df2.drop("Date", axis=1)
+    result=pd.concat([df, df2], axis=1, join='inner')
+    result.to_csv(r'C:\Users\Utki\Desktop\code\stock\trial2.csv')
+    result = pd.read_csv('trial2.csv')
+    # If you know the name of the column skip this
+    first_column = result.columns[0]
+    # Delete first
+    result = result.drop([first_column], axis=1)
+    result.to_csv('trial2.csv', index=False)
+    # If you know the name of the column skip this
+    first_column = df3.columns[0]
+    # Delete first
+    df3.to_csv('trial.csv', index=False)
+    print(result)
+    print(df3)
+    st.dataframe(result)
+    st.dataframe(df3)
+    csv_file = os.path.dirname(os.path.realpath(__file__)) + "/trial2.csv"
+    vix_csv_file = os.path.dirname(os.path.realpath(__file__)) + "/trial.csv"
+
+    spyVixDataFeed = SPYVIXData(dataname=csv_file)
+    vixDataFeed = VIXData(dataname=vix_csv_file)
+    start=start.split("-")
+    end=end.split("-")
+    for i in range(len(start)):
+        start[i]=int(start[i])
+    for j in range(len(end)):
+        end[j]=int(end[j])
+    year=end[0]-start[0]
+    month=end[1]-start[1]
+    day=end[2]-start[2]
+    totalyear=year+(month/12)+(day/365)
+    matplotlib.use('Agg')
+    cerebro.adddata(spyVixDataFeed)
+    cerebro.adddata(vixDataFeed)
+
+    cerebro.addstrategy(VIXStrategy)
+
+    cerebro.run()
+    print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
+    print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
+
+    final_value=cerebro.broker.getvalue()
+    returns=(final_value-start_value)*100/start_value
+    annual_return=returns/totalyear
+    returns=round(returns, 2)
+    annual_return=round(annual_return,2)
+    returns=str(returns)
+    annual_return=str(annual_return)
+    figure = cerebro.plot(volume=False)[0][0]
+    st.pyplot(figure)
+    st.subheader(f"{ticker}'s total returns are {returns}% with a {annual_return}% APY")
+    strategy=''
+'''
+    global strategy
+    import backtrader as bt
+    import os
+    from VIXStrategy import VIXStrategy
+    import yfinance as yf
+    import pandas as pd
+    global ticker
+    ticker=st.sidebar.text_input("Stock ticker", value="AAPL")
+    start=st.sidebar.text_input("Start date", value="2018-01-31")
+    end=st.sidebar.text_input("End date", value=today)
+    cash=st.sidebar.text_input("Starting cash", value=10000)
+    cash=int(cash)
+    cerebro = bt.Cerebro()
+    cerebro.broker.setcash(cash)
+    start_value=cash
+    class SPYVIXData(bt.feeds.GenericCSVData):
+        lines = ('vixopen', 'vixhigh', 'vixlow', 'vixclose',)
+
+        params = (
+            ('dtformat', '%Y-%m-%d'),#'dtformat', '%Y-%m-%d'),
+            ('date', 0),
+            ('spyopen', 1),
+            ('spyhigh', 2),
+            ('spylow', 3),
+            ('spyclose', 4),
+            ('spyadjclose', 5),
+            ('spyvolume', 6),
+            ('vixopen', 7),
+            ('vixhigh', 8),
+            ('vixlow', 9),
+            ('vixclose', 10)
+        )
+
+    class VIXData(bt.feeds.GenericCSVData):
+            params = (
+            ('dtformat', '%Y-%m-%d'),
+            ('date', 0),
+            ('vixopen', 1),
+            ('vixhigh', 2),
+            ('vixlow', 3),
+            ('vixclose', 4),
+            ('volume', -1),
+            ('openinterest', -1)
+        )
+    df = yf.download(tickers=ticker, start=start, end=end, rounding= False)
+    ticker=ticker
+    df=df.reset_index() 
+    df2 = yf.download(tickers='^VIX', start=start, end=end, rounding= False)
+    df2.rename(columns = {'Open':'Vix Open', 'High':'Vix High', 'Low':'Vix Low', 'Close':'Vix Close'}, inplace = True)
+    df2=df2.drop("Volume", axis=1)
+    df2=df2.drop("Adj Close", axis=1)
+    df2=df2.reset_index()
+    df3=df2
     df3.to_csv(r'C:\Users\Utki\Desktop\code\stock\trial.csv')
     df2=df2.drop("Date", axis=1)
     result=pd.concat([df, df2], axis=1, join='inner')
@@ -172,7 +280,7 @@ def volatility():
     st.pyplot(figure)
     st.subheader(f"{ticker}'s total returns are {returns}% with a {annual_return}% APY")
     strategy=''
-
+'''
 def backtestgolden():
     global strategy
     ticker=st.sidebar.text_input("Stock ticker", value="AAPL")
