@@ -1,5 +1,4 @@
 streamlit
-subprocess
 backtrader
 yfinance
 pandas
