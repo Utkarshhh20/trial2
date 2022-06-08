@@ -1,5 +1,5 @@
 streamlit
-talib
+subprocess
 backtrader
 yfinance
 pandas
@@ -12,5 +12,6 @@ gunicorn
 datetime
 os
 PIL
+sys
 matplotlib==3.2.2
 
