@@ -489,7 +489,7 @@ if dashboard=='Pattern Stocks':
     yesterday=f"{yesterday}"
     end=f"{today}"
     time=end.split('-')
-    time[0]=int(time[0])
+    time[1]=int(time[1])
     time[1]=time[1]-1
     start=f"{time[0]}-{time[1]}-{time[2]}"
     lst=[]
