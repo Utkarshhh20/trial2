@@ -20,7 +20,7 @@ import requests
 import os
 import sys
 import subprocess
-'''
+
 # check if the library folder already exists, to avoid building everytime you load the pahe
 if not os.path.isdir("/tmp/ta-lib"):
 
@@ -57,7 +57,7 @@ except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--global-option=build_ext", "--global-option=-L/home/appuser/lib/", "--global-option=-I/home/appuser/include/", "ta-lib"])
 finally:
     import talib
-    '''
+   
 def fxn():
     warnings.warn("deprecated", DeprecationWarning)
 with warnings.catch_warnings():
