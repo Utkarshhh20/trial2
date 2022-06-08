@@ -518,7 +518,7 @@ if dashboard=='Pattern Stocks':
     datafiles=os.listdir('sp500_daily')
     for filename in datafiles:
         df=pd.read_csv('sp500_daily/{}'.format(filename))
-        pattern_function= getattr(ta, pattern)
+        pattern_function= getattr(talib, pattern)
         try:
             result=pattern_function(df['Open'], df['High'], df['Low'], df['Close'])
             last=result.tail(days).values[0]
