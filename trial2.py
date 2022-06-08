@@ -490,13 +490,14 @@ if dashboard=='Pattern Stocks':
     end=f"{today}"
     time=end.split('-')
     time[0]=int(time[0])
-    time[0]=time[0]-1
+    time[1]=time[1]-1
     start=f"{time[0]}-{time[1]}-{time[2]}"
     lst=[]
     date_check=pd.read_csv('https://raw.githubusercontent.com/Utkarshhh20/trial2/main/sp500_daily/AAPL.csv')
     length=len(date_check)
     present=date_check['Date'][length-1]
     if yesterday!=present:
+        start=start + timedelta(days=1)
         data()
     df_sp500=pd.read_csv("sp500.csv")
     tickers=[]
