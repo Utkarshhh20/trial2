@@ -15,7 +15,13 @@ from bs4 import BeautifulSoup as bs
 from rsi import RSIStrategy
 from datetime import date, timedelta
 from patterns import candlestick_patterns
+import streamlit as st
+import requests
+import os
+import sys
+import subprocess
 
+# check if the library folder already exists, to avoid building everytime you load the pahe
 if not os.path.isdir("/tmp/ta-lib"):
 
     # Download ta-lib to disk
