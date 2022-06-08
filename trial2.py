@@ -473,6 +473,7 @@ if dashboard=='Home':
 1. Fundamental Analysis\n
 2. Technical Analysis\n
 3. Backtesting''')
+    '''
 if dashboard=='Pattern Stocks':
     @st.cache
     def data():
@@ -543,6 +544,7 @@ if dashboard=='Pattern Stocks':
                     st.write('__________________________')
         except:
             pass
+           '''
 elif dashboard=='Fundamental Analysis':
     s_fundament = st.sidebar.selectbox('What would you like to do?', ('Learn', 'Check fundamentals'), 0)
     if s_fundament=='Learn':
