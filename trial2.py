@@ -429,8 +429,76 @@ if dashboard=='Home':
 1. Fundamental Analysis\n
 2. Technical Analysis\n
 3. Backtesting''')
-if dashboard=='Screener':
-    screener()
+if dashboard=='Pattern Stocks':
+    @st.cache
+    def data():
+        with open('sp500.csv') as f:
+            companies=f.read().splitlines()
+            print(companies)
+            for company in companies:
+                symbol=company.split(',')[0]
+                df=yf.download(symbol, start=start, end=today)
+                df.to_csv('sp500_daily/{}.csv'.format(symbol))
+    today=date.today()
+    yesterday = today - timedelta(days=1)
+    yesterday=f"{yesterday}"
+    end=f"{today}"
+    time=end.split('-')
+    time[0]=int(time[0])
+    time[0]=time[0]-1
+    start=f"{time[0]}-{time[1]}-{time[2]}"
+    lst=[]
+    date_check=pd.read_csv('sp500_daily\AAPL.csv')
+    length=len(date_check)
+    present=date_check['Date'][length-1]
+    if yesterday!=present:
+        data()
+    df_sp500=pd.read_csv("sp500.csv")
+    tickers=[]
+    companynames=[]
+    companies={}
+    for i in df_sp500['Ticker']:
+        tickers.append(i)
+    for j in df_sp500['Name']:
+        companynames.append(j)
+    companies=dict(zip(tickers, companynames))
+    for i in candlestick_patterns:
+        lst.append(candlestick_patterns[i])
+    pattern_name=st.sidebar.selectbox('Choose one of the following strategies',lst, 18)
+    days=st.sidebar.text_input('Enter the days in which the pattern should occur', max_chars=3, value=1)
+    days=int(days)
+    for i in candlestick_patterns:
+        if candlestick_patterns[i]==pattern_name:
+            pattern=i
+    datafiles=os.listdir('sp500_daily')
+    for filename in datafiles:
+        df=pd.read_csv('sp500_daily/{}'.format(filename))
+        pattern_function= getattr(ta, pattern)
+        try:
+            result=pattern_function(df['Open'], df['High'], df['Low'], df['Close'])
+            last=result.tail(days).values[0]
+            filename=filename.replace('.csv', '')
+            stock=filename
+            if last!=0:
+                company_name=companies[stock]
+                if last>0:
+                    first,middle,last=st.columns([1.4,2.3,1])
+                    first.subheader(f'{stock}')
+                    middle.subheader(f'{company_name}')
+                    last.subheader('BULLISH ⇪')
+                    url=f"https://finviz.com/chart.ashx?t={stock}&ty=c&ta=1&p=d&s=l"
+                    st.image(f"https://finviz.com/chart.ashx?t={stock}&ty=c&ta=1&p=d&s=l")
+                    st.write('__________________________')
+                elif last<0:
+                    first,middle,last=st.columns([1.4,2.3,1])
+                    first.subheader(filename)
+                    middle.subheader(f'{company_name}')
+                    last.subheader('BEARISH ⇩')
+                    url=f"https://finviz.com/chart.ashx?t={stock}&ty=c&ta=1&p=d&s=l"
+                    st.image(f"https://finviz.com/chart.ashx?t={stock}&ty=c&ta=1&p=d&s=l")
+                    st.write('__________________________')
+        except:
+            pass
 elif dashboard=='Fundamental Analysis':
     s_fundament = st.sidebar.selectbox('What would you like to do?', ('Learn', 'Check fundamentals'), 0)
     if s_fundament=='Learn':
