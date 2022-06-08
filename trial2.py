@@ -7,13 +7,15 @@ import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
 import warnings
-import quantstats as qs
+import os
+import talib as ta
 from matplotlib import warnings
 from matplotlib.dates import (HOURS_PER_DAY, MIN_PER_HOUR, SEC_PER_MIN)
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup as bs
 from rsi import RSIStrategy
-from datetime import date
+from datetime import date, timedelta
+from patterns import candlestick_patterns
 def fxn():
     warnings.warn("deprecated", DeprecationWarning)
 with warnings.catch_warnings():
