@@ -477,6 +477,7 @@ if dashboard=='Home':
 if dashboard=='Pattern Stocks':
     @st.cache
     def data():
+        st.subheader('Please wait while we fetch the data ⟳')
         with open('sp500.csv') as f:
             companies=f.read().splitlines()
             print(companies)
