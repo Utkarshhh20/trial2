@@ -13,7 +13,7 @@ from matplotlib.dates import (HOURS_PER_DAY, MIN_PER_HOUR, SEC_PER_MIN)
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup as bs
 from rsi import RSIStrategy
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from patterns import candlestick_patterns
 import streamlit as st
 import requests
