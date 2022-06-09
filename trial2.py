@@ -485,6 +485,7 @@ if dashboard=='Pattern Stocks':
                 df=yf.download(symbol, start=start, end=today)
                 df.to_csv('sp500_daily/{}.csv'.format(symbol))
     today=date.today()
+    st.write(today)
     yesterday = today - timedelta(days=1)
     yesterday=f"{yesterday}"
     end=f"{today}"
@@ -497,8 +498,8 @@ if dashboard=='Pattern Stocks':
     length=len(date_check)
     present=date_check['Date'][length-1]
     if yesterday!=present:
-        start1 = start + timedelta(days=1)
-        start=start1
+        start = start + timedelta(days=1)
+        start=f"{start}"
         data()
     df_sp500=pd.read_csv("sp500.csv")
     tickers=[]
