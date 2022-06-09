@@ -482,8 +482,11 @@ if dashboard=='Pattern Stocks':
             print(companies)
             for company in companies:
                 symbol=company.split(',')[0]
-                df=yf.download(symbol, start=start, end=today)
-                df.to_csv('sp500_daily/{}.csv'.format(symbol))
+                try: 
+                    df=yf.download(symbol, start=start, end=today)
+                    df.to_csv('sp500_daily/{}.csv'.format(symbol))
+                except:
+                    pass
     today=date.today()
     st.write(today)
     yesterday = today - timedelta(days=1)
