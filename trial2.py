@@ -63,6 +63,7 @@ def fxn():
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     fxn()
+
 st.set_option('deprecation.showPyplotGlobalUse', False)
 today=date.today()
 def backtestrsi():
@@ -475,7 +476,7 @@ if dashboard=='Home':
 3. Backtesting''')
    
 if dashboard=='Pattern Stocks':
-    @st.cache
+    @st.cache(suppress_st_warning=True)
     def data():
         st.subheader('Please wait while we fetch the data ⟳')
         with open('sp500.csv') as f:
