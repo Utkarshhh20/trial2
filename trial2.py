@@ -515,7 +515,7 @@ if dashboard=='Pattern Stocks':
     companies=dict(zip(tickers, companynames))
     for i in candlestick_patterns:
         lst.append(candlestick_patterns[i])
-    pattern_name=st.sidebar.selectbox('Choose one of the following strategies',lst, 18)
+    pattern_name=st.sidebar.selectbox('Choose one of the following strategies',lst, 15)
     days=st.sidebar.text_input('Enter the days in which the pattern should occur', max_chars=3, value=1)
     days=int(days)
     for i in candlestick_patterns:
