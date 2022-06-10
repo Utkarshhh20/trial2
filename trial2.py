@@ -27,7 +27,7 @@ import hydralit_components as hc
         #MainMenu {visibility: hidden;}
 #        </style>
 #        """
-st.markdown(hide_menu_style, unsafe_allow_html=True)
+#st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 # check if the library folder already exists, to avoid building everytime you load the pahe
 if not os.path.isdir("/tmp/ta-lib"):
