@@ -20,7 +20,7 @@ import requests
 import os
 import sys
 import subprocess
-
+from streamlit_option_menu import option_menu
 # check if the library folder already exists, to avoid building everytime you load the pahe
 if not os.path.isdir("/tmp/ta-lib"):
 
@@ -437,7 +437,20 @@ title_alignment2="""
     </body>
     """
 st.sidebar.markdown(title_alignment2, unsafe_allow_html=True)
-dashboard = st.sidebar.selectbox('', ('Home', 'Screener', 'Fundamental Analysis', 'Technical Indicators', 'Backtesting', 'Pattern Stocks'), 0)
+#dashboard = st.sidebar.selectbox('', ('Home', 'Screener', 'Fundamental Analysis', 'Technical Indicators', 'Backtesting', 'Pattern Stocks'), 0)
+dashboard = option_menu (
+        menu_title=None, 
+        options=['Home', 'Fundamental Analysis', 'Technical Indicators', 'Backtesting'], 
+        default_index=0, 
+        orientation='horizontal', 
+        icons=['house', 'cash coin','align-middle', 'code-slash'],
+        styles={
+            "container": {"padding": "100!important", "background-color":'white', "margin-top":'-10px'},
+            "icons": {"color": "blue"},
+            "nav-link": {"font-size": "25px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+            "nav-link-selected": {"background-color": "green"},
+        }
+    )           
 st.title(dashboard)
 st.write('___')
 if dashboard=='Home':
