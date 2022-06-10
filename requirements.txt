@@ -9,5 +9,6 @@ bs4
 plotly
 gunicorn
 datetime
+streamlit_option_menu
 matplotlib==3.2.2
 
