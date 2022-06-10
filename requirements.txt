@@ -10,5 +10,6 @@ plotly
 gunicorn
 datetime
 streamlit_option_menu
+hydralit_components
 matplotlib==3.2.2
 
