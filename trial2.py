@@ -21,6 +21,7 @@ import os
 import sys
 import subprocess
 from streamlit_option_menu import option_menu
+import hydralit_components as hc
 hide_menu_style = """
         <style>
         #MainMenu {visibility: hidden;}
