@@ -22,11 +22,11 @@ import sys
 import subprocess
 from streamlit_option_menu import option_menu
 import hydralit_components as hc
-hide_menu_style = """
-        <style>
+#hide_menu_style = """
+#        <style>
         #MainMenu {visibility: hidden;}
-        </style>
-        """
+#        </style>
+#        """
 st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 # check if the library folder already exists, to avoid building everytime you load the pahe
