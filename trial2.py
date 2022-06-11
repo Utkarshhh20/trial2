@@ -76,10 +76,10 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 today=date.today()
 def backtestrsi():
     global strategy
-    ticker=st.sidebar.text_input("Stock ticker", value="AAPL")
-    start=st.sidebar.text_input("Start date", value="2018-01-31")
-    end=st.sidebar.text_input("End date", value=today)
-    cash=st.sidebar.text_input("Starting cash", value=10000)
+    #ticker=st.sidebar.text_input("Stock ticker", value="AAPL")
+    #start=st.sidebar.text_input("Start date", value="2018-01-31")
+    #end=st.sidebar.text_input("End date", value=today)
+    #cash=st.sidebar.text_input("Starting cash", value=10000)
     cash=int(cash)
     cerebro=bt.Cerebro()
     cerebro.broker.set_cash(cash)
@@ -127,10 +127,10 @@ def volatility():
     import yfinance as yf
     import pandas as pd
     global ticker
-    ticker=st.sidebar.text_input("Stock ticker", value="AAPL")
-    start=st.sidebar.text_input("Start date", value="2018-01-31")
-    end=st.sidebar.text_input("End date", value=today)
-    cash=st.sidebar.text_input("Starting cash", value=10000)
+    #ticker=st.sidebar.text_input("Stock ticker", value="AAPL")
+    #start=st.sidebar.text_input("Start date", value="2018-01-31")
+    #end=st.sidebar.text_input("End date", value=today)
+    #cash=st.sidebar.text_input("Starting cash", value=10000)
     cash=int(cash)
     cerebro = bt.Cerebro()
     cerebro.broker.setcash(cash)
@@ -231,10 +231,10 @@ def volatility():
 def backtestgolden():
     global strategy
     from goldencrossover import goldencrossover
-    ticker=st.sidebar.text_input("Stock ticker", value="AAPL")
-    start=st.sidebar.text_input("Start date", value="2018-01-31")
-    end=st.sidebar.text_input("End date", value=today)
-    cash=st.sidebar.text_input("Starting cash", value=10000)
+    #ticker=st.sidebar.text_input("Stock ticker", value="AAPL")
+    #start=st.sidebar.text_input("Start date", value="2018-01-31")
+    #end=st.sidebar.text_input("End date", value=today)
+    #cash=st.sidebar.text_input("Starting cash", value=10000)
     cash=int(cash)
     cerebro=bt.Cerebro()
     cerebro.broker.set_cash(cash)
@@ -278,10 +278,10 @@ def backtestbollinger():
     import pandas as pd
     import pandas_datareader as pdr
     import matplotlib.pyplot as plt
-    symbol=st.sidebar.text_input("Stock ticker", value="AAPL")
-    start=st.sidebar.text_input("Start date", value="2018-01-31")
-    end=st.sidebar.text_input("End date", value=today)
-    cash=st.sidebar.text_input("Starting cash", value=10000)
+    #symbol=st.sidebar.text_input("Stock ticker", value="AAPL")
+    #start=st.sidebar.text_input("Start date", value="2018-01-31")
+    #end=st.sidebar.text_input("End date", value=today)
+    #cash=st.sidebar.text_input("Starting cash", value=10000)
     cash=int(cash)
     def get_bollinger_bands(prices, rate=20):
         sma=prices.rolling(rate).mean()
@@ -429,8 +429,8 @@ title="""
     <p1 class='stockify'>Stockify</p1>
     </body>
     """
-st.sidebar.markdown(title, unsafe_allow_html=True)
-st.sidebar.write('_______________________')
+#st.sidebar.markdown(title, unsafe_allow_html=True)
+#st.sidebar.write('_______________________')
 title_alignment2="""
     <style>
     .trial2 {
@@ -444,7 +444,7 @@ title_alignment2="""
     <h1 class='trial2'>Select your dashboard</h1>
     </body>
     """
-st.sidebar.markdown(title_alignment2, unsafe_allow_html=True)
+#st.sidebar.markdown(title_alignment2, unsafe_allow_html=True)
 #dashboard = st.sidebar.selectbox('', ('Home', 'Screener', 'Fundamental Analysis', 'Technical Indicators', 'Backtesting', 'Pattern Stocks'), 0)
 menu_data = [
     {'icon': "far fa-copy", 'label':"Left End"},
@@ -557,8 +557,8 @@ if dashboard=='Pattern Stocks':
     companies=dict(zip(tickers, companynames))
     for i in candlestick_patterns:
         lst.append(candlestick_patterns[i])
-    pattern_name=st.sidebar.selectbox('Choose one of the following strategies',lst, 15)
-    days=st.sidebar.text_input('Enter the days in which the pattern should occur', max_chars=3, value=1)
+    #pattern_name=st.sidebar.selectbox('Choose one of the following strategies',lst, 15)
+    #days=st.sidebar.text_input('Enter the days in which the pattern should occur', max_chars=3, value=1)
     days=int(days)
     for i in candlestick_patterns:
         if candlestick_patterns[i]==pattern_name:
@@ -594,7 +594,7 @@ if dashboard=='Pattern Stocks':
             pass
     
 elif dashboard=='Fundamental Analysis':
-    s_fundament = st.sidebar.selectbox('What would you like to do?', ('Learn', 'Check fundamentals'), 0)
+    #s_fundament = st.sidebar.selectbox('What would you like to do?', ('Learn', 'Check fundamentals'), 0)
     if s_fundament=='Learn':
         st.subheader('What Is Fundamental Analysis?')
         st.write('''• Fundamental analysis is a method of determining a stock's real or "fair market" value.\n
@@ -609,7 +609,7 @@ For stocks, fundamental analysis uses revenues, earnings, future growth, return 
         st.write('')
         st.write('''**Check the fundamentals of any stock by entering the ticker in the sidebar on the next page.**\n''')
     elif s_fundament=='Check fundamentals':
-        symbol=st.sidebar.text_input("Ticker", value='AAPL', max_chars=10)
+        #symbol=st.sidebar.text_input("Ticker", value='AAPL', max_chars=10)
         pd.set_option('display.max_colwidth', 25)
         st.subheader(f"{symbol}'s Fundamentals ")
         # Set up scraper
@@ -635,7 +635,7 @@ However, before chasing each insider move, outsiders need to consider the factor
         st.write('')
         st.write("\nStocks correlate the performance with the current market conditions and business news. They also predict the performance of the stock market and advise on buying and selling of stocks, mutual funds, and other securities.")
 if dashboard=='Backtesting':
-    strategy = st.sidebar.selectbox("Which Strategy?", ('Intro', 'RSI', 'Volatility', 'Golden Crossover', 'Bollinger Bands'), 0, key='strategy')
+    #strategy = st.sidebar.selectbox("Which Strategy?", ('Intro', 'RSI', 'Volatility', 'Golden Crossover', 'Bollinger Bands'), 0, key='strategy')
     st.header(strategy)
     if strategy=='Intro':
         st.subheader('What is backtesting?')
